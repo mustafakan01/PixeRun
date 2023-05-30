@@ -1,20 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class Platform : MonoBehaviour
 {
-    [SerializeField] private float _speed;
-    [SerializeField] Rigidbody2D _rb2d;
-    [SerializeField] private GameObject _platformPrefab;
-    [SerializeField] private float currentXSpawnPoit = 12f;
-    [SerializeField] private bool collectionChecks=true;
-    [SerializeField] private int maxPoolSize = 15;
-    public IObjectPool<GameObject> m_pool{ get; set; }
+    public float speed=5;
+    BoxCollider2D box;
+    float groundWitdh;
+
+
+
+    void Start()
+    {
+        box = GetComponent<BoxCollider2D>();
+        groundWitdh = box.size.x;
+           
+    }
     void Update()
     {
-        _rb2d.velocity = new Vector2(-1 * _speed,0);
+       transform.position = new Vector2(transform.position.x-speed*Time.deltaTime, transform.position.y);
+
+        if (transform.position.x<=groundWitdh)
+        {
+            transform.position = new Vector2(transform.position.x +3* groundWitdh, transform.position.y);
+        }
 
     }
 }
