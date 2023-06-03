@@ -2,22 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public  class  Platform : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    public static float speed = 5;
-    BoxCollider2D box;
+    public  float speed = 5;
     float groundWitdh;
-    public static Rigidbody2D rbplt;
-
-
-
+    public  Rigidbody2D rbe;
+  
     void Start()
     {
-        rbplt = GetComponent<Rigidbody2D>();
-        box = GetComponent<BoxCollider2D>();
-        groundWitdh = box.size.x;
-
+        rbe = GetComponent<Rigidbody2D>();
+        //groundWitdh = 30;
     }
+
+    
     void Update()
     {
         transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
@@ -26,7 +23,5 @@ public  class  Platform : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x + 3 * groundWitdh, transform.position.y);
         }
-
     }
-  
 }

@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jump : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float jumpForce;
     public bool isJump=true;
     public Animator animation;
-
+    public int health=1;
+    Platform platform;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,6 +39,13 @@ public class Jump : MonoBehaviour
         {
             isJump = false;
             animation.SetBool("Jump", false);
+        }
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            health = 0;
+            Platform.speed = 0;
+           
+            
         }
 
     }
