@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public float jumpForce;
     public bool isJump=true;
     public Animator animation;
-    public int health=1;
+    public bool death=false;
     Platform platform;
     
     void Start()
@@ -18,15 +18,16 @@ public class Player : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(isJump== false)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                animation.SetBool("Jump", true);
                 rb.AddForce(Vector2.up * jumpForce);
                 isJump = true;
-                animation.SetBool("Jump", true);
+                
             }
         }
        
@@ -42,10 +43,13 @@ public class Player : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            health = 0;
-            Platform.speed = 0;
-           
-            
+            //death = true;
+            //Enemy.speed = 0;
+            //Platform.speed = 0;
+            //animation.SetBool("Death", true);
+            Time.timeScale = 0;
+
+
         }
 
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public  float speed = 5;
+    public static float speed = 5;
     float groundWitdh;
     public  Rigidbody2D rbe;
   
@@ -22,6 +22,16 @@ public class Enemy : MonoBehaviour
         if (transform.position.x <= groundWitdh)
         {
             transform.position = new Vector2(transform.position.x + 3 * groundWitdh, transform.position.y);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        float xPoz = Random.Range(25f, 40f);
+        if (collision.gameObject.CompareTag("Respawn"))
+        {
+            transform.position = new Vector2(xPoz, transform.position.y);
+           
         }
     }
 }
